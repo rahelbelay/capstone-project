@@ -38,7 +38,7 @@ export default class TripCreateForm extends React.Component {
                         <input
                             onChange={this._handleLocation}
                             value={this.state.location}
-                            placeholder="Location"
+                            placeholder="City"
                         />
                         <input
                             onChange={this._handleDay}

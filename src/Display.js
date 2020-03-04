@@ -30,9 +30,11 @@ export default function App() {
                     </ul>
                 </nav>
                 <Switch>
-                    <Route path="/api/my-trips">
-                        <MyTrips />
-                    </Route>
+                    <Route path="/api/my-trips"
+                        render={(props) => <MyTrips {...props} />}
+                    />
+
+                    {/* </Route> */}
                     <Route path="/api/signup">
                         <SignUpForm />
                     </Route>
@@ -42,11 +44,13 @@ export default function App() {
                     <Route path="/api/create-trip">
                         <TripCreateForm />
                     </Route>
-                    <Route path="/api/trip-detail/:id">
-                        <TripDetail />
-                    </Route>
+                    <Route path="/api/trip-detail/:id"
+                        render={(props) => <TripDetail{...props} />}
+                    />
+
+                    {/* </Route> */}
                 </Switch>
             </div>
-        </Router>
+        </Router >
     );
 }

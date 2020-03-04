@@ -45,7 +45,10 @@ class MyTrips extends React.Component {
     }
 
     _handleClick = tripId => {
-        history.push(`/api/my-trips/${tripId}`);
+        // let history = useHistory();
+        console.log(this.props)
+
+        this.props.history.push(`/api/trip-detail/${tripId}`);
     };
 
     _getAllTripsByUserId = async () => {

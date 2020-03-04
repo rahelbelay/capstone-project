@@ -1,9 +1,11 @@
 import React from "react";
 import axios from "axios";
+import { useParams } from 'react-router-dom';
+
 
 axios.defaults.withCredentials = true;
 
-class MyTrips extends React.Component {
+class TripDetail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,6 +16,7 @@ class MyTrips extends React.Component {
     }
 
     componentDidMount() {
+        console.log(this.props)
         const id = this.props.match.params.id;
         this._getTripDetailById(id);
     }
@@ -21,6 +24,7 @@ class MyTrips extends React.Component {
     render() {
         return (
             <div>
+
                 {this.state.loading && <h1>loading...</h1>}
                 <ul>
                     {this.state.trips.map(trip => {
@@ -30,9 +34,9 @@ class MyTrips extends React.Component {
                                     <div>
                                         <div className="trip-detail">
                                             <p>{trip.location}</p>
-                                            {/* <p>weather</p>
-                                                <p>busy???</p> */}
-                                            {/* <p>{trip.day}</p> */}
+                                            <p>weather</p>
+                                            <p>busy???</p>
+                                            <p>{trip.day}</p>
                                         </div>
                                     </div>
                                 }
@@ -50,8 +54,9 @@ class MyTrips extends React.Component {
             .get(`/api/trip-detail/${id}`)
             .then(response => {
                 console.log(response.data.result);
+
                 this.setState({
-                    trips: response.data.result,
+                    trips: [...this.state.trips, response.data.result],
                     loading: false
                 });
                 console.log(this.state.trips);
@@ -64,4 +69,4 @@ class MyTrips extends React.Component {
     };
 }
 
-export default MyTrips;
+export default TripDetail;
