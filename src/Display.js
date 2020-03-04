@@ -1,22 +1,16 @@
-import React from 'react';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import LogIn from './LogIn';
-import SignUpForm from './SignUpForm';
-import TripCreateForm from './TripCreateForm';
-import MyTrips from './MyTrips';
-import TripDetail from './TripDetail';
+import LogIn from "./LogIn";
+import SignUpForm from "./SignUpForm";
+import TripCreateForm from "./TripCreateForm";
+import MyTrips from "./MyTrips";
+import TripDetail from "./TripDetail";
+import history from "./history";
 
 export default function App() {
-
-
     return (
-        <Router>
+        <Router history={history}>
             <div>
                 <nav>
                     <ul>
@@ -32,14 +26,11 @@ export default function App() {
                         <li>
                             <Link to="/api/login">Log In</Link>
                         </li>
-                        <li>
-                            {/* <Link to="/api/trip-detail">Trip Detail </Link> */}
-                        </li>
+                        <li>{/* <Link to="/api/trip-detail">Trip Detail </Link> */}</li>
                     </ul>
                 </nav>
                 <Switch>
                     <Route path="/api/my-trips">
-
                         <MyTrips />
                     </Route>
                     <Route path="/api/signup">

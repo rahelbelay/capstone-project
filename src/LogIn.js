@@ -1,68 +1,82 @@
-import React from 'react';
+import React from "react";
 import axios from "axios";
-axios.defaults.withCredentials = true
-
+import history from "./history";
+import { Redirect } from "react-router-dom";
+axios.defaults.withCredentials = true;
 
 export default class LoginForm extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            password: '',
+            email: "",
+            password: "",
             loading: false,
-            loginSuccess: false,
-
+            loginSuccess: false
         };
     }
+
     render() {
+        if (this.state.loginSuccess) {
+            return <Redirect to="/api/my-trips" />
+        }
 
         return (
-            <div >
-                <div >
+            <div>
+                <div>
                     <input type="text" placeholder="Search for places" />
-                    <form onSubmit={this.onSubmit} >
-
+                    <form onSubmit={this.onSubmit}>
                         <input
                             onChange={this._handleEmail}
-                            value={this.state.email} placeholder="E-Mail"
+                            value={this.state.email}
+                            placeholder="E-Mail"
                         />
-                        <input type="password"
+                        <input
+                            type="password"
                             onChange={this._handlePassword}
-                            value={this.state.password} placeholder="Password"
+                            value={this.state.password}
+                            placeholder="Password"
                         />
-                        <input type="submit" value="Sign in" disabled={this.state.loading} />
+                        <input
+                            type="submit"
+                            value="Sign in"
+                            disabled={this.state.loading}
+                        />
                     </form>
                 </div>
-
             </div>
-        )
+        );
     }
-    onSubmit = () => {
+
+    onSubmit = (e) => {
+        e.preventDefault();
+
         const loginBody = {
             email: this.state.email,
             password: this.state.password
-        }
-        this.setState({ loading: true })
-        axios.post('/api/login', loginBody).then(response => {
-            console.log("logged in successfully!")
-            this.setState({ loginSuccess: true, loading: false })
-        }).catch(e => {
-
-            this.setState({ loading: false })
-        });
+        };
+        this.setState({ loading: true });
+        axios
+            .post("/api/login", loginBody)
+            .then(response => {
+                console.log("logged in successfully!");
+                this.setState({ loginSuccess: true, loading: false });
+            })
+            .catch(e => {
+                this.setState({ loading: false });
+            });
     };
 
-
-    _handleEmail = (event) => {
+    _handleEmail = event => {
         this.setState({
             email: event.target.value
         });
-    }
-    _handlePassword = (event) => {
+    };
+
+    _handlePassword = event => {
         this.setState({
             password: event.target.value
         });
-    }
+    };
 }
+
 
