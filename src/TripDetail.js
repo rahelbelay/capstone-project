@@ -12,6 +12,7 @@ import { Grid, TextField } from "@material-ui/core";
 
 axios.defaults.withCredentials = true;
 const API_KEY = "c3e8793eb809694aee4ce6c2e1bf2551"
+const ApI_KEY_GOOGLE = "AIzaSyD_EXdqLdaexVtGyv3bE3B48-FdiBmgtBg"
 
 const styles = theme => ({
     container: {
@@ -123,7 +124,7 @@ class TripDetail extends React.Component {
         const googleSearchResults = []
         // call to google maps api and save it to state
         // send this.state.query to google maps api 
-        const response = await axios.get('https://maps.googleapis.com/maps/api/place/queryautocomplete/json?key=AIzaSyD_EXdqLdaexVtGyv3bE3B48-FdiBmgtBg&input=pizza+near%20paris', { headers: { 'X-Requested-With': 'XMLHttpRequest' } }
+        const response = await axios.get(`https://maps.googleapis.com/maps/api/place/queryautocomplete/json?key=${ApI_KEY_GOOGLE}&input=pizza+near%20paris`, { headers: { 'X-Requested-With': 'XMLHttpRequest' } }
         ).then(response => {
             console.log(response)
         });
