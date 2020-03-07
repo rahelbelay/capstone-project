@@ -1,9 +1,25 @@
 import React from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { Paper, Typography, withStyles } from "@material-ui/core";
+
 axios.defaults.withCredentials = true;
 
-export default class SignUpForm extends React.Component {
+const styles = theme => ({
+    input: {
+        marginBottom: '0.75em'
+    },
+    action: {
+        marginTop: '1em',
+    },
+    title: {
+        marginBottom: '1em'
+    }
+});
+
+class SignUpForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,40 +30,65 @@ export default class SignUpForm extends React.Component {
             signUpSuccess: false
         };
     }
-
     render() {
+        const { classes } = this.props;
+
         if (this.state.signUpSuccess) {
             return <Redirect to="/api/login" />
         }
-
         return (
-            <div>
-                <div>
-                    <form onSubmit={this.onSubmit}>
-                        <input
+            <div className="login-wrapper">
+                <form noValidate autoComplete="off" onSubmit={this.onSubmit}>
+                    <Paper className="paper">
+                        <Typography className={classes.title} variant="h6">Create an account</Typography>
+                        <TextField
+                            label="Email"
+                            variant="filled"
+                            fullWidth
                             onChange={this._handleEmail}
                             value={this.state.email}
-                            placeholder="E-Mail"
+                            className={classes.input}
                         />
-                        <input
-                            type="text"
+
+                        <TextField
+                            type="password"
+                            label="Password"
+                            variant="filled"
+                            fullWidth
                             onChange={this._handlePassword}
                             value={this.state.password}
-                            placeholder="password "
+                            className={classes.input}
                         />
-                        <input
+
+                        <TextField
+                            label="First Name"
+                            variant="filled"
+                            fullWidth
                             onChange={this._handleFirstName}
                             value={this.state.first_name}
-                            placeholder="First Name"
+                            className={classes.input}
                         />
-                        <input
+
+                        <TextField
+                            label="Last Name"
+                            variant="filled"
+                            fullWidth
                             onChange={this._handleLastName}
                             value={this.state.last_name}
-                            placeholder="Last Name"
+                            className={classes.input}
                         />
-                        <input type="submit" value="Sign Up" />
-                    </form>
-                </div>
+
+                        <Button
+                            fullWidth
+                            type="submit"
+                            className={classes.action}
+                            variant="contained"
+                            color="primary"
+                        >
+                            Sign up
+                        </Button>
+                    </Paper>
+                </form>
             </div>
         );
     }
@@ -60,7 +101,6 @@ export default class SignUpForm extends React.Component {
             password: this.state.password,
             first_name: this.state.first_name,
             last_name: this.state.last_name,
-
         };
 
         this.setState({ loading: true });
@@ -100,3 +140,5 @@ export default class SignUpForm extends React.Component {
         });
     };
 }
+
+export default withStyles(styles)(SignUpForm)

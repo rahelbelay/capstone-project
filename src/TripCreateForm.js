@@ -3,9 +3,26 @@ import { Redirect } from "react-router-dom";
 import axios from "axios";
 import history from "./history";
 
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { withStyles, Typography, Paper } from "@material-ui/core";
+
 axios.defaults.withCredentials = true;
 
-export default class TripCreateForm extends React.Component {
+const styles = theme => ({
+    input: {
+        marginBottom: '0.75em'
+    },
+    action: {
+        marginTop: '1em',
+    },
+    title: {
+        marginBottom: '1em'
+    }
+});
+
+
+class TripCreateForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -30,26 +47,48 @@ export default class TripCreateForm extends React.Component {
     }
 
     render() {
-        console.log(this.props);
+        const { classes } = this.props;
+
+        if (this.state.createdSuccessfully) {
+            return <Redirect to="/api/my-trips" />
+        }
+
         return (
             <div>
-                <div>
-                    <form onSubmit={this.onSubmit}>
-                        <input
-                            onChange={this._handleLocation}
-                            value={this.state.location}
-                            placeholder="City"
-                        />
-                        <input
-                            onChange={this._handleDay}
-                            value={this.state.day}
-                            placeholder="Day"
-                        />
+                <Typography className={classes.title} variant="h6">Live with no excuses and travel with no regret</Typography>
+                <div className="login-wrapper">
+                    <form noValidate autoComplete="off" onSubmit={this.onSubmit}>
+                        <Paper className="paper">
+                            <TextField
+                                label="Enter City"
+                                fullWidth
+                                className={classes.input}
+                                variant="filled"
+                                onChange={this._handleLocation}
+                                value={this.state.location}
+                            />
 
-                        <input type="submit" value="Create Trip" />
+                            <TextField
+                                label="How many days ..."
+                                fullWidth
+                                className={classes.input}
+                                variant="filled"
+                                onChange={this._handleDay}
+                                value={this.state.day}
+                            />
+
+                            <Button
+                                type="submit"
+                                className={classes.action}
+                                variant="contained"
+                                color="primary"
+                                fullWidth
+                            >
+                                Create Trip
+                        </Button>
+                        </Paper>
                     </form>
-                </div>
-                {this.state.createdSuccessfully && <Redirect to="/api/my-trips" />}
+                </div >
             </div>
         );
     }
@@ -89,3 +128,5 @@ export default class TripCreateForm extends React.Component {
         });
     };
 }
+
+export default withStyles(styles)(TripCreateForm)

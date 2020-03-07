@@ -1,40 +1,23 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
 import LogIn from "./LogIn";
 import SignUpForm from "./SignUpForm";
 import TripCreateForm from "./TripCreateForm";
 import MyTrips from "./MyTrips";
 import TripDetail from "./TripDetail";
 import history from "./history";
+import Nav from "./Nav"
+
 
 export default function App() {
     return (
         <Router history={history}>
             <div>
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="/api/create-trip">Create Trip</Link>
-                        </li>
-                        <li>
-                            <Link to="/api/my-trips">My Trips</Link>
-                        </li>
-                        <li>
-                            <Link to="/api/signup">Sign up</Link>
-                        </li>
-                        <li>
-                            <Link to="/api/login">Log In</Link>
-                        </li>
-                        <li>{/* <Link to="/api/trip-detail">Trip Detail </Link> */}</li>
-                    </ul>
-                </nav>
+                <Nav />
                 <Switch>
                     <Route path="/api/my-trips"
                         render={(props) => <MyTrips {...props} />}
                     />
-
-                    {/* </Route> */}
                     <Route path="/api/signup">
                         <SignUpForm />
                     </Route>
@@ -45,10 +28,8 @@ export default function App() {
                         <TripCreateForm />
                     </Route>
                     <Route path="/api/trip-detail/:id"
-                        render={(props) => <TripDetail{...props} />}
+                        render={(props) => <TripDetail {...props} />}
                     />
-
-                    {/* </Route> */}
                 </Switch>
             </div>
         </Router >

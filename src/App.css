@@ -1,43 +1,70 @@
-.App {
-  text-align: center;
+
+* {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body,html{
+  height: 100%;
+  width: 100%;
+}
+body{
+  background-color: #f1f1f1;
+  background-image: url(./Image/background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+} 
+
+.login-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 5em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.paper{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center; 
+  min-width: 400px;
+  padding: 3em;
 }
 
-.App-link {
-  color: #61dafb;
+.input {
+  padding-bottom: 0.5em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.action {
+  padding-top: 1em;
 }
 
-.my-trips {
+h1 {
+  color: #f1f1f1;
+  text-align: center;
+}
+.outlined-size-small {
+  margin: 1opx;
+}
+
+#openweathermap-widget-15{
+  width: 40px;
+}
+.card-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
+}
+.trip-card {
+  width: 200px;
+  margin: 10px;
+}
+
+.trip-card:hover {
+    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2),
+    0px 4px 5px 0px rgba(0,0,0,0.14),
+    0px 1px 10px 0px rgba(0,0,0,0.12);
 }
