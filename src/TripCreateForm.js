@@ -6,6 +6,7 @@ import history from "./history";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { withStyles, Typography, Paper } from "@material-ui/core";
+import GoogleMapAutoComplete from "./GoogleMapAutoComplete";
 
 axios.defaults.withCredentials = true;
 
@@ -55,18 +56,11 @@ class TripCreateForm extends React.Component {
 
         return (
             <div>
-                <Typography className={classes.title} variant="h6">Live with no excuses and travel with no regret</Typography>
+                <Typography className={classes.title} variant="h4">Live with no excuses and travel with no regret</Typography>
                 <div className="login-wrapper">
                     <form noValidate autoComplete="off" onSubmit={this.onSubmit}>
                         <Paper className="paper">
-                            <TextField
-                                label="Enter City"
-                                fullWidth
-                                className={classes.input}
-                                variant="filled"
-                                onChange={this._handleLocation}
-                                value={this.state.location}
-                            />
+                            <GoogleMapAutoComplete label="Where would you like to go?" type="geocode" onAutoComplete={this.onAutoComplete} bounded lat={this.state.lat} long={this.state.long} />
 
                             <TextField
                                 label="How many days ..."
@@ -93,11 +87,21 @@ class TripCreateForm extends React.Component {
         );
     }
 
+    onAutoComplete = data => {
+        const lat = data.lat
+        const long = data.long
+        const location = data.location
+
+        this.setState({ lat, long, location })
+    }
+
     onSubmit = e => {
         e.preventDefault();
-        console.log("submit");
+
         const createBody = {
             location: this.state.location,
+            lat: this.state.lat,
+            long: this.state.long,
             day: this.state.day
         };
 

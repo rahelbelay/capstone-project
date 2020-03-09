@@ -28,7 +28,7 @@ class MyTrips extends React.Component {
     render() {
         if (!this.state.trips || this.state.trips.length === 0) {
             return (
-                <div>
+                <div className="crate-trip">
                     <Typography variant="h6">You don't have any trips, why don't you create one</Typography>
                     <Button variant="contained" href="/api/create-trip">Create Trip</Button>
                 </div>
