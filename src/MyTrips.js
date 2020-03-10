@@ -9,8 +9,16 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Redirect } from "react-router-dom";
+import { withStyles } from "@material-ui/core";
 
 axios.defaults.withCredentials = true;
+
+const styles = theme => ({
+    bbb: {
+        marginBottom: '0.75em'
+    },
+
+});
 
 class MyTrips extends React.Component {
     constructor(props) {
@@ -26,6 +34,7 @@ class MyTrips extends React.Component {
     }
 
     render() {
+        const { classes } = this.props;
         if (!this.state.trips || this.state.trips.length === 0) {
             return (
                 <div className="crate-trip">
@@ -40,20 +49,21 @@ class MyTrips extends React.Component {
                 {this.state.loading && <h1>loading...</h1>}
                 <div className="card-container">
                     {this.state.trips && this.state.trips.map(trip =>
-                        <Card className="trip-card">
+                        <Card className="mytrip-card" style={{ backgroundImage: `url('${trip.picture_url}')` }} >
                             <CardActionArea onClick={() => this._handleClick(trip.id)} >
-                                <CardMedia
-                                    image="/static/images/cards/contemplative-reptile.jpg"
-                                    title="Contemplative Reptile"
-                                />
                                 <CardContent>
-                                    <Typography gutterBottom variant="h5" component="h2">
-                                        Image of Places
+                                    {/* <Typography gutterBottom variant="h6" component="h2" align="left">
+                                        <div >
+                                            <img src={trip.picture_url} />
+                                        </div>
+                                    </Typography> */}
+                                    <Typography gutterBottom variant="subtitle1" align="left" >
+                                        <div className="mytrip">
+                                            {` ${trip.location}`}<br></br>
+                                            {`${trip.day} - days`}
+                                        </div>
                                     </Typography>
                                 </CardContent>
-                                <Typography gutterBottom variant="subtitle1" align="center">
-                                    {`Your trip to ${trip.location}`}
-                                </Typography>
                             </CardActionArea>
                         </Card>
                     )}
@@ -87,4 +97,4 @@ class MyTrips extends React.Component {
     };
 }
 
-export default MyTrips;
+export default withStyles(styles)(MyTrips)

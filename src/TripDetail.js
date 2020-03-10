@@ -33,17 +33,18 @@ const styles = theme => ({
         marginBottom: '1em'
     },
     weatherContainer: {
-        marginBottom: '2em',
-        padding: '0 1em'
+        // backgroundColor: '#d8bebe',
+        // width: '20em',
+        // marginBottom: '2em',
+        // padding: '0 1em'
     },
     cardContent: {
         display: 'flex',
-        justifyContent: 'space-between'
-    },
-    rahel: {
-        display: 'flex',
+        justifyContent: 'space-between',
+        padding: '10px',
 
-    }
+    },
+
 });
 
 class TripDetail extends React.Component {
@@ -89,36 +90,44 @@ class TripDetail extends React.Component {
         }
         return (
             <div className={classes.container} >
-                <Card className={classes.weatherContainer}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        <img src={this.state.weatherIcon} />
-                        <p>Current temprature in {this.state.trip.location} is {this.state.currentTemp} Fahrenheit with {this.state.currentWeather}</p>
-                    </Typography>
-                </Card>
                 <Grid container spacing={3} >
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={6} sm={6}>
                         <GoogleMapAutoComplete type="establishment" label="Where would you like to visit" onAutoComplete={this._onAutoComplete}
                             bounded lat={this.state.trip.lat} long={this.state.trip.long} />
                         {this.state.savedPlaces && this.state.savedPlaces.length > 0 && (
                             this.state.savedPlaces.map(result => (
-                                <Card key={result.id}>
-                                    <CardContent className={classes.cardContent}>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            {result.name}
-                                        </Typography>
-                                        <IconButton aria-label="delete" onClick={() => this._handleDelete(result.id)}>
-                                            <DeleteIcon />
-                                        </IconButton>
-                                        {/* <Typography gutterBottom variant="h5" component="h2">
+                                <div className="autocomplete-place">
+                                    <Card key={result.id} className="weather-container" style={{ backgroundImage: `url('${result.picture_url}')` }}>
+                                        <CardContent className={classes.cardContent} >
+                                            <Typography gutterBottom variant="h6" component="h2">
+                                                {result.name}
+                                            </Typography>
+                                            <IconButton aria-label="delete" onClick={() => this._handleDelete(result.id)}>
+                                                <DeleteIcon />
+                                            </IconButton>
+
+                                            {/* <Typography gutterBottom variant="h5" component="h2">
                                             {result.description}
                                         </Typography> */}
-                                    </CardContent>
-                                </Card>
+                                        </CardContent>
+                                    </Card>
+                                </div>
                             ))
                         )}
                     </Grid>
 
                     <Grid item xs={12} sm={6}>
+                        <Card className={classes.weatherContainer} className="weather-container" style={{
+                            backgroundImage: `url('${this.state.trip.picture_url}')`
+                        }}>
+                            <Typography gutterBottom variant="h6" component="h2" align="left" >
+                                <div className="tripdetail">
+                                    <img src={this.state.weatherIcon} />
+                                    <p>{this.state.trip.location} </p>
+                                    <p> {this.state.currentTemp}˚F  {this.state.currentWeather}</p>
+                                </div>
+                            </Typography>
+                        </Card>
                         <GoogleMaps
                             isMarkerShown={this.state.isMarkerShown}
                             onMarkerClick={this.handleMarkerClick}
@@ -140,29 +149,22 @@ class TripDetail extends React.Component {
         const latitude = data.lat
         const longitude = data.long
         const name = data.location
+        const pictureUrl = data.pictureUrl
         const type = 'default'
         const tripId = this.state.trip.id
 
-        this.setState({ latitude, longitude, name, type, tripId });
+        const createBody = { latitude, longitude, name, type, pictureUrl, tripId }
 
-        this.savePlace();
+        this.savePlace(createBody);
     }
 
-    savePlace = () => {
-        const createBody = {
-            latitude: this.state.latitude,
-            longitude: this.state.longitude,
-            name: this.state.name,
-            type: this.state.type,
-            tripId: this.state.tripId
-        };
-
+    savePlace = (createBody) => {
         axios
             .post("/api/create/places", createBody)
             .then(response => {
                 console.log("place sucess!");
                 const newSavedPlaces = this.state.savedPlaces
-                newSavedPlaces.push({ name: this.state.name, id: response.data.newPlaceId })
+                newSavedPlaces.push({ ...createBody, id: response.data.newPlaceId })
 
                 this.setState({ savedPlaces: newSavedPlaces });
             })
@@ -170,7 +172,6 @@ class TripDetail extends React.Component {
                 console.log("place failed");
                 this.setState({ loading: false });
             });
-
     }
 
     _handleDelete = (id) => {

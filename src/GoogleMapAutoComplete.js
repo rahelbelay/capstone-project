@@ -8,6 +8,20 @@ import { makeStyles } from '@material-ui/core/styles';
 import parse from 'autosuggest-highlight/parse';
 import throttle from 'lodash/throttle';
 
+const API_KEY = 'AIzaSyD_EXdqLdaexVtGyv3bE3B48-FdiBmgtBg'
+
+function loadScript(src, position, id) {
+    if (!position) {
+        return;
+    }
+
+    const script = document.createElement('script');
+    script.setAttribute('async', '');
+    script.setAttribute('id', id);
+    script.src = src;
+    position.appendChild(script);
+}
+
 const autocompleteService = { current: null };
 let placesService = null;
 
@@ -25,6 +39,14 @@ export default function GoogleMapAutoComplete(props) {
     const loaded = React.useRef(false);
 
     if (typeof window !== 'undefined' && !loaded.current) {
+        if (!document.querySelector('#google-maps')) {
+            loadScript(
+                `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=geometry,drawing,places`,
+                document.querySelector('head'),
+                'google-maps',
+            );
+        }
+
         loaded.current = true;
     }
 
@@ -35,7 +57,7 @@ export default function GoogleMapAutoComplete(props) {
     const onAutoComplete = placeId => {
         const request = {
             placeId,
-            fields: ['name', 'formatted_address', 'place_id', 'geometry']
+            fields: ['name', 'photo', 'formatted_address', 'place_id', 'geometry']
         };
 
         placesService.getDetails(request, placesLookupCallback)
@@ -45,9 +67,12 @@ export default function GoogleMapAutoComplete(props) {
         const lat = place.geometry.location.lat()
         const long = place.geometry.location.lng()
         const location = place.name
+        const pictureUrl = place.photos && place.photos[0] ? place.photos[0].getUrl() : ''
 
-        const data = { lat, long, location }
+        const data = { lat, long, location, pictureUrl }
+
         props.onAutoComplete(data)
+
     }
 
     const fetch = React.useMemo(

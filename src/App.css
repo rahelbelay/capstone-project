@@ -4,19 +4,20 @@
 }
 
 body,html{
+ 
   height: 100%;
   width: 100%;
 }
 body{
-  background-color: #f1f1f1;
+  /* background-color: #799fe6; */
   background-image: url(./Image/background.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
   height: auto;
   position: fixed;
-  top: 0;
-  left: 0;
+  overflow: scroll;
+  
 } 
 
 .login-wrapper {
@@ -43,6 +44,7 @@ body{
 }
 
 h4 {
+  color: white;
   text-align: center;
   padding-top: 2em;
 }
@@ -58,9 +60,27 @@ h4 {
   flex-wrap: wrap;
   justify-content: space-around;
 }
-.trip-card {
-  width: 200px;
+.mytrip-card {
+  
+  width: 250px;
+  height:150px;
   margin: 10px;
+  padding-top: 10px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  
+  /* background-image: url(./Image/architectural-photo-of-a-green-and-beige-castle-2446161.jpg); */
+
+}
+.weather-container{
+ 
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 450px;
+  margin: 10px;
+  padding-top: 2em;
+  border-radius: 4em;
+  width: 100%;
 }
 .crate-trip {
   display: flex;
@@ -73,3 +93,21 @@ h4 {
     0px 4px 5px 0px rgba(0,0,0,0.14),
     0px 1px 10px 0px rgba(0,0,0,0.12);
 }
+.mytrip{
+  margin-top: 70px;
+  color: white;
+  font-size: 14px; 
+}
+.tripdetail{
+  color: white;
+  font-size: 14px;
+}
+.autocomplete-place {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 12px ;
+
+}
+
+

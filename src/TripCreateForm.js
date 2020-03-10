@@ -56,11 +56,11 @@ class TripCreateForm extends React.Component {
 
         return (
             <div>
-                <Typography className={classes.title} variant="h4">Live with no excuses and travel with no regret</Typography>
+                <Typography className={classes.title} variant="h4">Live with no excuses and <br></br>travel with no regret</Typography>
                 <div className="login-wrapper">
                     <form noValidate autoComplete="off" onSubmit={this.onSubmit}>
                         <Paper className="paper">
-                            <GoogleMapAutoComplete label="Where would you like to go?" type="geocode" onAutoComplete={this.onAutoComplete} bounded lat={this.state.lat} long={this.state.long} />
+                            <GoogleMapAutoComplete label="Where would you like to go?" type="geocode" onAutoComplete={this.onAutoComplete} />
 
                             <TextField
                                 label="How many days ..."
@@ -91,8 +91,9 @@ class TripCreateForm extends React.Component {
         const lat = data.lat
         const long = data.long
         const location = data.location
+        const pictureUrl = data.pictureUrl
 
-        this.setState({ lat, long, location })
+        this.setState({ lat, long, location, pictureUrl })
     }
 
     onSubmit = e => {
@@ -102,7 +103,8 @@ class TripCreateForm extends React.Component {
             location: this.state.location,
             lat: this.state.lat,
             long: this.state.long,
-            day: this.state.day
+            day: this.state.day,
+            pictureUrl: this.state.pictureUrl
         };
 
         this.setState({ loading: true });
