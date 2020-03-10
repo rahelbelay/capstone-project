@@ -13,10 +13,7 @@ body{
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
-  height: auto;
-  position: fixed;
-
- 
+  overflow: scroll ;
 } 
 
 .login-wrapper {
@@ -61,15 +58,14 @@ h4 {
 }
 .mytrip-card {
   
-  width: 250px;
-  height:150px;
+  width: 320px;
+  height:200px;
   margin: 10px;
   padding-top: 10px;
   background-size: cover;
   background-repeat: no-repeat;
   
   /* background-image: url(./Image/architectural-photo-of-a-green-and-beige-castle-2446161.jpg); */
-
 }
 .weather-container{
  
@@ -101,7 +97,9 @@ h4 {
 }
 .tripdetail{
   color: white;
-  font-size: 16px;
+  font-size: 14px;
+  margin-left: 2em;
+ 
  
 }
 .autocomplete-place {
