@@ -1,14 +1,10 @@
 import React from "react";
 import axios from "axios";
-import history from "./history";
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { Redirect } from "react-router-dom";
 import { withStyles } from "@material-ui/core";
 
 axios.defaults.withCredentials = true;
@@ -17,7 +13,6 @@ const styles = theme => ({
     bbb: {
         marginBottom: '0.75em'
     },
-
 });
 
 class MyTrips extends React.Component {
@@ -73,7 +68,6 @@ class MyTrips extends React.Component {
             </div>
         );
     }
-
     _handleClick = tripId => {
         console.log(this.props)
         this.props.history.push(`/api/trip-detail/${tripId}`);

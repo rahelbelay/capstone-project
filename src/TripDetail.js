@@ -2,13 +2,9 @@ import React from "react";
 import axios from "axios";
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { Grid, TextField, CircularProgress } from "@material-ui/core";
+import { Grid, CircularProgress } from "@material-ui/core";
 import GoogleMaps from "./GoogleMaps";
 import GoogleMapAutoComplete from "./GoogleMapAutoComplete";
 import IconButton from '@material-ui/core/IconButton';
@@ -32,12 +28,7 @@ const styles = theme => ({
     title: {
         marginBottom: '1em'
     },
-    weatherContainer: {
-        // backgroundColor: '#d8bebe',
-        // width: '20em',
-        // marginBottom: '2em',
-        // padding: '0 1em'
-    },
+
     cardContent: {
         display: 'flex',
         justifyContent: 'space-between',
@@ -161,7 +152,9 @@ class TripDetail extends React.Component {
             .then(response => {
                 console.log("place sucess!");
                 const newSavedPlaces = this.state.savedPlaces
-                newSavedPlaces.push({ ...createBody, id: response.data.newPlaceId })
+                newSavedPlaces.push({
+                    ...createBody, id: response.data.newPlaceId
+                })
 
                 this.setState({ savedPlaces: newSavedPlaces });
             })
@@ -179,7 +172,7 @@ class TripDetail extends React.Component {
         })
             .catch(err => {
                 console.log(err);
-                console.log("error deleing trip ");
+                console.log("error deleting trip ");
                 this.setState({ loading: false });
             });
     }
@@ -203,8 +196,6 @@ class TripDetail extends React.Component {
                 this.setState({ loading: false });
             });
     };
-
-
     _getSavedPlacesByTripId = tripId => {
         this.setState({ loading: true });
 
