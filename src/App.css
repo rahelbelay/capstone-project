@@ -4,20 +4,19 @@
 }
 
 body,html{
- 
   height: 100%;
   width: 100%;
+  overflow: scroll;
 }
 body{
-  /* background-color: #799fe6; */
   background-image: url(./Image/background.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
   height: auto;
   position: fixed;
-  overflow: scroll;
-  
+
+ 
 } 
 
 .login-wrapper {
@@ -77,15 +76,17 @@ h4 {
   background-size: cover;
   background-repeat: no-repeat;
   width: 450px;
-  margin: 10px;
+  margin-bottom: 20px;
   padding-top: 2em;
   border-radius: 4em;
   width: 100%;
+  
 }
 .crate-trip {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  margin-top: 40px;
+ text-align: center;
+ color: white;
+ font-size: 16px;
 
 }
 .trip-card:hover {
@@ -100,14 +101,17 @@ h4 {
 }
 .tripdetail{
   color: white;
-  font-size: 14px;
+  font-size: 16px;
+ 
 }
 .autocomplete-place {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   margin: 12px ;
-
+}
+.create-button {
+  margin-top: 30px;
 }
 
 

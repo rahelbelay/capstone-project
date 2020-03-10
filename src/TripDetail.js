@@ -21,7 +21,7 @@ const styles = theme => ({
     container: {
         display: 'flex',
         margin: '2em',
-        flexDirection: 'column',
+        flexDirection: 'column'
     },
     input: {
         marginBottom: '0.75em'
@@ -42,6 +42,7 @@ const styles = theme => ({
         display: 'flex',
         justifyContent: 'space-between',
         padding: '10px',
+        color: 'white',
 
     },
 
@@ -102,13 +103,9 @@ class TripDetail extends React.Component {
                                             <Typography gutterBottom variant="h6" component="h2">
                                                 {result.name}
                                             </Typography>
-                                            <IconButton aria-label="delete" onClick={() => this._handleDelete(result.id)}>
+                                            <IconButton style={{ color: 'white' }} aria-label="delete" onClick={() => this._handleDelete(result.id)}>
                                                 <DeleteIcon />
                                             </IconButton>
-
-                                            {/* <Typography gutterBottom variant="h5" component="h2">
-                                            {result.description}
-                                        </Typography> */}
                                         </CardContent>
                                     </Card>
                                 </div>

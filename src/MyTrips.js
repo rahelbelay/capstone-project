@@ -38,8 +38,14 @@ class MyTrips extends React.Component {
         if (!this.state.trips || this.state.trips.length === 0) {
             return (
                 <div className="crate-trip">
-                    <Typography variant="h6">You don't have any trips, why don't you create one</Typography>
-                    <Button variant="contained" href="/api/create-trip">Create Trip</Button>
+                    <div >
+
+                        <Typography variant="h4">You don't have any trips, why don't you create one</Typography>
+                    </div>
+                    <div className="create-button">
+
+                        <Button variant="contained" href="/api/create-trip">Create Trip</Button>
+                    </div>
                 </div>
             )
         }
@@ -52,11 +58,7 @@ class MyTrips extends React.Component {
                         <Card className="mytrip-card" style={{ backgroundImage: `url('${trip.picture_url}')` }} >
                             <CardActionArea onClick={() => this._handleClick(trip.id)} >
                                 <CardContent>
-                                    {/* <Typography gutterBottom variant="h6" component="h2" align="left">
-                                        <div >
-                                            <img src={trip.picture_url} />
-                                        </div>
-                                    </Typography> */}
+
                                     <Typography gutterBottom variant="subtitle1" align="left" >
                                         <div className="mytrip">
                                             {` ${trip.location}`}<br></br>
