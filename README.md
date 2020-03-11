@@ -1,7 +1,7 @@
 # Vacation Planner
 
 ## Screenshots
-![Image](https://user-images.githubusercontent.com/56299775/76396478-99ac6600-634f-11ea-8a35-8e57b25bcc8b.png")
+<img width="1356" alt="login" src="https://user-images.githubusercontent.com/56299775/76397344-489d7180-6351-11ea-828f-cf4bb945f72c.png">
 
 ## Project Description
 
