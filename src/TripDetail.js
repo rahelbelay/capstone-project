@@ -20,7 +20,8 @@ const styles = theme => ({
         flexDirection: 'column'
     },
     input: {
-        marginBottom: '0.75em'
+        marginBottom: '0.75em',
+
     },
     action: {
         marginTop: '1em',
@@ -35,9 +36,7 @@ const styles = theme => ({
         color: 'white',
         zIndex: 100,
     },
-    // autocomplete: {
-    //     padding: '10px',
-    // },
+
     cardContent: {
         display: 'flex',
         justifyContent: 'space-between',
@@ -65,7 +64,38 @@ const styles = theme => ({
         width: '100%',
         position: 'absolute',
         backgroundColor: '#00000075',
-    }
+    },
+    autocomplete: {
+        paddingBottom: '2em',
+    },
+    weatherContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignContent: 'space-between',
+        justifyContent: 'space-around',
+        marginTop: '4px',
+        position: 'relative',
+        width: '100%',
+        maxHeight: '70px',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+    },
+    cardContent: {
+        display: 'flex',
+
+        height: '100%',
+        justifyContent: 'space-between',
+
+
+    },
+    overlay: {
+        height: '100%',
+        minHeight: '1px',
+        width: '100%',
+        position: 'absolute',
+        backgroundColor: '#00000075',
+    },
+
 
 });
 
@@ -113,14 +143,17 @@ class TripDetail extends React.Component {
             <div className={classes.container} >
                 <Grid container spacing={3} >
                     <Grid item xs={6} sm={6}>
-                        <GoogleMapAutoComplete className={classes.autocomplete} type="establishment" label="Search for places to visit" onAutoComplete={this._onAutoComplete}
-                            bounded lat={this.state.trip.lat} long={this.state.trip.long} />
+                        <div className={classes.autocomplete}>
+                            <GoogleMapAutoComplete type="establishment" label="Search for places to visit" onAutoComplete={this._onAutoComplete}
+                                bounded lat={this.state.trip.lat} long={this.state.trip.long} />
+                        </div>
                         {this.state.savedPlaces && this.state.savedPlaces.length > 0 && (
                             this.state.savedPlaces.map(result => (
                                 <div className="autocomplete-place">
-                                    <Card key={result.id} className="weather-container" style={{ backgroundImage: `url('${result.picture_url}')` }}>
+                                    <Card key={result.id} className={classes.weatherContainer} style={{ backgroundImage: `url('${result.picture_url}')` }}>
+                                        <div className={classes.overlay} />
                                         <CardContent className={classes.cardContent} >
-                                            <Typography gutterBottom variant="h6" component="h2">
+                                            <Typography className={classes.text} gutterBottom variant="subtitle2">
                                                 {result.name}
                                             </Typography>
                                             <IconButton style={{ color: 'white' }} aria-label="delete" onClick={() => this._handleDelete(result.id)}>

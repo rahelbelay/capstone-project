@@ -11,7 +11,8 @@ axios.defaults.withCredentials = true;
 
 const styles = theme => ({
     input: {
-        marginBottom: '0.75em'
+        marginBottom: '0.75em',
+        marginTop: '1em'
     },
     action: {
         marginTop: '1em',
@@ -66,6 +67,7 @@ class TripCreateForm extends React.Component {
                 <div className="login-wrapper">
                     <form noValidate autoComplete="off" onSubmit={this.onSubmit}>
                         <Paper className="paper">
+
                             <GoogleMapAutoComplete label="Where would you like to go?" type="geocode" onAutoComplete={this.onAutoComplete} />
 
                             <TextField
