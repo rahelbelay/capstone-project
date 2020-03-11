@@ -35,6 +35,9 @@ const styles = theme => ({
         color: 'white',
         zIndex: 100,
     },
+    // autocomplete: {
+    //     padding: '10px',
+    // },
     cardContent: {
         display: 'flex',
         justifyContent: 'space-between',
@@ -110,7 +113,7 @@ class TripDetail extends React.Component {
             <div className={classes.container} >
                 <Grid container spacing={3} >
                     <Grid item xs={6} sm={6}>
-                        <GoogleMapAutoComplete type="establishment" label="Search for places to visit" onAutoComplete={this._onAutoComplete}
+                        <GoogleMapAutoComplete className={classes.autocomplete} type="establishment" label="Search for places to visit" onAutoComplete={this._onAutoComplete}
                             bounded lat={this.state.trip.lat} long={this.state.trip.long} />
                         {this.state.savedPlaces && this.state.savedPlaces.length > 0 && (
                             this.state.savedPlaces.map(result => (

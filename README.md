@@ -9,14 +9,12 @@
 
 ## Project Description
 
-Vacation Planner is a web application that helps users to create trip for a vaction.The platform provides a simple interface to search city and displys autocomplet results to choose .The users should sign up and login to create trip or to display the trips already created which is stored in postgres database. In create trip form, users insert the city and how may days spend. Furthermore, app lets  users to select places to visit current temprature, map location, and image of place. 
+Vacation Planner is a web application that helps users to create trip for a vaction.The platform provides a simple interface to search city and displys autocomplet results to choose .The users should sign up and login to create trip or to display the trips already created which is stored in postgres database. In create trip form, users insert the city and for how may days then by pressing creat trip button the trip will be created which displays current temprature, map location, and image of place. Furthermore, my app lets  users to select places to visit. 
 
 ## Challenge
-- I used google maps api to display choosen city location,  the biggest challenge was to understand how the api works,setting the marker and writing autocomplet function.
+I used google maps api to display choosen city location,  the biggest challenge was to understand how the api works,setting the marker and writing autocomplet function.
 
-
-
-## Built With
+## Built Withexit
 - React
 - Express
 - Postgres Database

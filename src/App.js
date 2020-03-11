@@ -14,6 +14,7 @@ export default function App() {
     return (
         <Router history={history}>
             <>
+
                 <Nav />
                 <Switch>
                     <Route path="/api/my-trips"
@@ -28,6 +29,7 @@ export default function App() {
                     <Route path="/api/create-trip">
                         <TripCreateForm />
                     </Route>
+
                     <Route path="/api/trip-detail/:id"
                         render={(props) => <TripDetail {...props} />}
                     />
