@@ -10,9 +10,31 @@ import { withStyles } from "@material-ui/core";
 axios.defaults.withCredentials = true;
 
 const styles = theme => ({
-    bbb: {
-        marginBottom: '0.75em'
+    text: {
+        color: 'white',
     },
+    card: {
+        position: 'relative',
+        width: '320px',
+        minHeight: '175px',
+        margin: '10px',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+    },
+    cardAction: {
+        display: 'flex',
+        alignItems: 'flex-start',
+        height: '100%',
+        justifyContent: 'flex-end',
+        flexDirection: 'column',
+    },
+    overlay: {
+        height: '100%',
+        minHeight: '1px',
+        width: '100%',
+        position: 'absolute',
+        backgroundColor: '#00000075',
+    }
 });
 
 class MyTrips extends React.Component {
@@ -50,16 +72,12 @@ class MyTrips extends React.Component {
                 {this.state.loading && <h1>loading...</h1>}
                 <div className="card-container">
                     {this.state.trips && this.state.trips.map(trip =>
-                        <Card className="mytrip-card" style={{ backgroundImage: `url('${trip.picture_url}')` }} >
-                            <CardActionArea onClick={() => this._handleClick(trip.id)} >
+                        <Card className={classes.card} style={{ backgroundImage: `url('${trip.picture_url}')` }} >
+                            <div className={classes.overlay} />
+                            <CardActionArea className={classes.cardAction} onClick={() => this._handleClick(trip.id)} >
                                 <CardContent>
-
-                                    <Typography gutterBottom variant="subtitle1" align="left" >
-                                        <div className="mytrip">
-                                            {` ${trip.location}`}<br></br>
-                                            {`${trip.day} - days`}
-                                        </div>
-                                    </Typography>
+                                    <Typography className={classes.text} variant="h5" align="left">{trip.location}</Typography>
+                                    <Typography className={classes.text} variant="subtitle1" align="left">{`Trip for ${trip.day} days`}</Typography>
                                 </CardContent>
                             </CardActionArea>
                         </Card>

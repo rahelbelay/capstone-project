@@ -3,27 +3,26 @@
   box-sizing: border-box;
 }
 
-body,html{
+#root {
   height: 100%;
   width: 100%;
-  overflow: scroll;
 }
-body{
-  background-image: url(./Image/background.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
+
+body {
   width: 100%;
-  overflow: scroll ;
+  height: 100vh;
+  overflow: scroll;
+  background-color: #ebebeb;
 } 
 
 .login-wrapper {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 10em;
+  margin-top: 3em;
 }
 
-.paper{
+.paper {
   display: flex;
   flex-direction: column;
   align-items: center; 
@@ -55,27 +54,9 @@ h4 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  padding: 2em;
 }
-.mytrip-card {
-  
-  width: 320px;
-  height:200px;
-  margin: 10px;
-  padding-top: 10px;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-.weather-container{
- 
-  background-size: cover;
-  background-repeat: no-repeat;
-  width: 450px;
-  margin-bottom: 20px;
-  padding-top: 2em;
-  border-radius: 4em;
-  width: 100%;
-  
-}
+
 .crate-trip {
   margin-top: 40px;
  text-align: center;
@@ -93,18 +74,12 @@ h4 {
   color: white;
   font-size: 14px; 
 }
-.tripdetail{
-  color: white;
-  font-size: 14px;
-  margin-left: 2em;
- 
- 
-}
+
 .autocomplete-place {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin: 12px ;
+  margin-top: 4px ;
 }
 .create-button {
   margin-top: 30px;

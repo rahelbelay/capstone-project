@@ -17,7 +17,14 @@ const styles = theme => ({
         marginTop: '1em',
     },
     title: {
-        marginBottom: '1em'
+        color: 'white',
+    },
+    container: {
+        backgroundImage: `url('https://images8.alphacoders.com/541/541025.jpg')`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        height: '100%',
+        width: '100%',
     }
 });
 
@@ -54,8 +61,8 @@ class TripCreateForm extends React.Component {
         }
 
         return (
-            <div>
-                <Typography className={classes.title} variant="h4">Live with no excuses and <br></br>travel with no regret</Typography>
+            <div className={classes.container}>
+                <Typography className={classes.title} variant="h4">Discover new places</Typography>
                 <div className="login-wrapper">
                     <form noValidate autoComplete="off" onSubmit={this.onSubmit}>
                         <Paper className="paper">

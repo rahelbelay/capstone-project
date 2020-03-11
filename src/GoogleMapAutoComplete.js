@@ -68,7 +68,6 @@ export default function GoogleMapAutoComplete(props) {
         const long = place.geometry.location.lng()
         const location = place.name
         const pictureUrl = place.photos && place.photos[0] ? place.photos[0].getUrl() : ''
-
         const data = { lat, long, location, pictureUrl }
 
         props.onAutoComplete(data)
@@ -123,10 +122,11 @@ export default function GoogleMapAutoComplete(props) {
 
     return (
         <Autocomplete
-            style={{ width: 300 }}
+            style={{ width: '100%' }}
             getOptionLabel={option => (typeof option === 'string' ? option : option.description)}
             options={options}
             autoComplete
+            freeSolo
             includeInputInList
             onChange={(event, value) => {
                 if (value && value.place_id) {

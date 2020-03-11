@@ -28,14 +28,41 @@ const styles = theme => ({
     title: {
         marginBottom: '1em'
     },
-
+    weatherIcon: {
+        zIndex: 100
+    },
+    text: {
+        color: 'white',
+        zIndex: 100,
+    },
     cardContent: {
         display: 'flex',
         justifyContent: 'space-between',
         padding: '10px',
         color: 'white',
-
     },
+    card: {
+        position: 'relative',
+        width: '100%',
+        minHeight: '175px',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        marginBottom: '2em',
+    },
+    cardAction: {
+        display: 'flex',
+        alignItems: 'flex-start',
+        height: '100%',
+        justifyContent: 'flex-end',
+        flexDirection: 'column',
+    },
+    overlay: {
+        height: '100%',
+        minHeight: '1px',
+        width: '100%',
+        position: 'absolute',
+        backgroundColor: '#00000075',
+    }
 
 });
 
@@ -52,7 +79,6 @@ class TripDetail extends React.Component {
             savedPlaces: [],
             isMarkerShown: false,
             createdSuccessfully: false
-
         };
     }
 
@@ -84,7 +110,7 @@ class TripDetail extends React.Component {
             <div className={classes.container} >
                 <Grid container spacing={3} >
                     <Grid item xs={6} sm={6}>
-                        <GoogleMapAutoComplete type="establishment" label="Where would you like to visit" onAutoComplete={this._onAutoComplete}
+                        <GoogleMapAutoComplete type="establishment" label="Search for places to visit" onAutoComplete={this._onAutoComplete}
                             bounded lat={this.state.trip.lat} long={this.state.trip.long} />
                         {this.state.savedPlaces && this.state.savedPlaces.length > 0 && (
                             this.state.savedPlaces.map(result => (
@@ -105,15 +131,18 @@ class TripDetail extends React.Component {
                     </Grid>
 
                     <Grid item xs={12} sm={6}>
-                        <Card className={classes.weatherContainer} className="weather-container" style={{
+                        <Card className={classes.card} style={{
                             backgroundImage: `url('${this.state.trip.picture_url}')`
                         }}>
+                            <div className={classes.overlay} />
+
+                            <CardContent className={classes.cardAction}>
+                                <img className={classes.weatherIcon} src={this.state.weatherIcon} />
+                                <Typography className={classes.text} variant="h5" align="left">{this.state.trip.location}</Typography>
+                                <Typography className={classes.text} variant="subtitle1" align="left">{this.state.currentTemp}˚F {this.state.currentWeather}</Typography>
+                            </CardContent>
+
                             <Typography gutterBottom variant="h6" component="h2" align="left" >
-                                <div className="tripdetail">
-                                    <img src={this.state.weatherIcon} />
-                                    <p>{this.state.trip.location} </p>
-                                    <p> {this.state.currentTemp}˚F  {this.state.currentWeather}</p>
-                                </div>
                             </Typography>
                         </Card>
                         <GoogleMaps
@@ -150,6 +179,7 @@ class TripDetail extends React.Component {
         axios
             .post("/api/create/places", createBody)
             .then(response => {
+                console.log(response)
                 console.log("place sucess!");
                 const newSavedPlaces = this.state.savedPlaces
                 newSavedPlaces.push({
@@ -157,6 +187,8 @@ class TripDetail extends React.Component {
                 })
 
                 this.setState({ savedPlaces: newSavedPlaces });
+                const id = this.props.match.params.id;
+                this._getSavedPlacesByTripId(id)
             })
             .catch(e => {
                 console.log("place failed");

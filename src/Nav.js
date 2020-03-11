@@ -10,6 +10,7 @@ const useStyles = makeStyles(theme => ({
     toolbar: {
         display: 'flex',
         justifyContent: 'space-between',
+        backgroundColor: '#1a8399',
     },
     link: {
         color: 'white',
