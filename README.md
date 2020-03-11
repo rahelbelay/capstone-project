@@ -1,8 +1,8 @@
 # Vacation Planner
 
 ## Screenshots
-<img width="1356" alt="login" src="https://user-images.githubusercontent.com/56299775/76397344-489d7180-6351-11ea-828f-cf4bb945f72c.png">
 <img width="1357" alt="signup" src="https://user-images.githubusercontent.com/56299775/76398232-e8a7ca80-6352-11ea-90bf-316e3ab46e83.png">
+<img width="1356" alt="login" src="https://user-images.githubusercontent.com/56299775/76397344-489d7180-6351-11ea-828f-cf4bb945f72c.png">
 <img width="1355" alt="createtrip" src="https://user-images.githubusercontent.com/56299775/76429230-202f6a80-6385-11ea-89fc-e762cf56a9dd.png">
 <img width="1359" alt="mytrip" src="https://user-images.githubusercontent.com/56299775/76398293-05440280-6353-11ea-80df-0db038e4e9bc.png">
 <img width="1358" alt="savedplaces" src="https://user-images.githubusercontent.com/56299775/76429206-17d72f80-6385-11ea-8ea6-6e675f617f0b.png">
